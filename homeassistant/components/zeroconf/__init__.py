@@ -117,10 +117,7 @@ def _async_zc_has_functional_dual_stack() -> bool:
 
     Zeroconf only supports a single listen socket at this time.
     """
-    return not sys.platform.startswith("freebsd") and not sys.platform.startswith(
-        "darwin"
-    )
-
+    return not sys.platform.startswith("freebsd") and not sys.platform.startswith("netbsd") and not sys.platform.startswith("darwin")
 
 def _async_get_zc_args(hass: HomeAssistant) -> dict[str, Any]:
     """Get zeroconf arguments from config."""
