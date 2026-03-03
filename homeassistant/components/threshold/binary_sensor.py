@@ -224,6 +224,10 @@ class ThresholdSensor(BinarySensorEntity):
                 self.sensor_value = None
                 _LOGGER.warning("State is not numerical")
 
+            if self.sensor_value is None:
+                _LOGGER.info("threshold skipping sensor_value None")
+                return
+
             self._update_state()
 
             if self._preview_callback:
@@ -277,6 +281,7 @@ class ThresholdSensor(BinarySensorEntity):
             return sensor_value > (threshold + self._hysteresis)
 
         if self.sensor_value is None:
+            _LOGGER.warning("threshold update_state None => POSITION_UNKNOWN");
             self._state_position = POSITION_UNKNOWN
             self._attr_is_on = None
             return
