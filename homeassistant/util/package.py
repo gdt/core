@@ -191,6 +191,7 @@ def install_package(
             )
             return False
 
+    _LOGGER.info("Successful install of %s", package)
     return True
 
 
