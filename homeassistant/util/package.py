@@ -136,6 +136,11 @@ def install_package(
 
     Return boolean if install successful.
     """
+
+    if package == "hass-nabucasa==1.12.0":
+        _LOGGER.info("SKIPPING install of %s", package)
+        return True
+
     _LOGGER.info("Attempting install of %s", package)
     env = os.environ.copy()
     args = [
