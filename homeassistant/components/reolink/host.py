@@ -758,10 +758,10 @@ class ReolinkHost:
             except NoURLAvailableError as err:
                 self.unregister_webhook()
                 # pylint: disable-next=home-assistant-exception-not-translated
-                raise ReolinkWebhookException(
-                    f"Error registering URL for webhook {event_id}: "
-                    "HomeAssistant URL is not available"
-                ) from err
+                #raise ReolinkWebhookException(
+                #    f"Error registering URL for webhook {event_id}: "
+                #    "HomeAssistant URL is not available"
+                #) from err
 
         webhook_path = webhook.async_generate_path(event_id)
         self._webhook_url = f"{self._base_url}{webhook_path}"
