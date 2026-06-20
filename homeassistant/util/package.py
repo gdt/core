@@ -136,10 +136,13 @@ def install_package(
     """
     _LOGGER.info("Attempting install of %s", package)
     env = os.environ.copy()
+    # Avoid uv, because it is difficult to build and because it has a
+    # bug on NetBSD, blurring amd64 and x86_64 and rejecting valid
+    # wheels.
     args = [
         sys.executable,
         "-m",
-        "uv",
+        #"uv",
         "pip",
         "install",
         "--quiet",
@@ -147,8 +150,8 @@ def install_package(
         # We need to use unsafe-first-match for custom components
         # which can use a different version of a package than the one
         # we have built the wheel for.
-        "--index-strategy",
-        "unsafe-first-match",
+        #"--index-strategy",
+        #"unsafe-first-match",
     ]
     if timeout:
         env["HTTP_TIMEOUT"] = str(timeout)
