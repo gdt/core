@@ -92,6 +92,10 @@ class AlertEntity(Entity):
         if (to_state := event.data["new_state"]) is None:
             return
         LOGGER.debug("Watched entity (%s) has changed", event.data["entity_id"])
+        LOGGER.debug("  to %s alert_state %s", to_state.state, self._alert_state)
+        if to_state.state == "off" and self._alert_state == "False":
+            self._alert_state = "off"
+            LOGGER.debug("  to %s alert_state %s", to_state.state, self._alert_state)
         if to_state.state == self._alert_state and not self._firing:
             await self.begin_alerting()
         if to_state.state != self._alert_state and self._firing:
