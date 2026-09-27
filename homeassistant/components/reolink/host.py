@@ -762,11 +762,11 @@ class ReolinkHost:
             )
         except NoURLAvailableError as err:
             self.unregister_webhook(id)
-            raise ReolinkWebhookException(
-                translation_domain=DOMAIN,
-                translation_key="webhook_no_url",
-                translation_placeholders={"event_id": event_id},
-            ) from err
+            #raise ReolinkWebhookException(
+            #    translation_domain=DOMAIN,
+            #    translation_key="webhook_no_url",
+            #    translation_placeholders={"event_id": event_id},
+            #) from err
 
         self._base_url = self._webhook_url[id].split("/api/", 1)[0]
         _LOGGER.debug("Registered webhook: %s", event_id)
