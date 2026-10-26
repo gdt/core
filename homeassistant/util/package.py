@@ -189,6 +189,7 @@ def install_package(
         args += ["--python", sys.executable, "--target", abs_target]
 
     if (stderr := _install(args, env)) is None:
+        _LOGGER.info("Successful install of %s", package)
         return True
 
     # uv treats a failing extra index as fatal, unlike pip which skips it.
